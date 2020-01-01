@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- provider's application name, used for tracing dependency relationship -->
+    <dubbo:application name="user-provider"/>
+    <!-- use multicast registry center to export service -->
+    <dubbo:registry address="zookeeper://192.168.238.150:2181?backup=192.168.238.155:2181,192.168.238.160:2181,192.168.238.165:2181"/>
+    <dubbo:reference id="orderService" interface="com.tom.OrderService" protocol="hessian"/>
+    <dubbo:reference id="orderQueryService" interface="com.tom.OrderQueryService"  version="1.0.0"/>
+    <dubbo:reference id="orderQueryService2" interface="com.tom.OrderQueryService" version="2.0.0" async="true"/>
+</beans>
